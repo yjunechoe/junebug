@@ -1,5 +1,5 @@
 Package: junebug
-Title: A collection of functions for interactive use
+Title: A person collection of functions, mostly for interactive use
 Version: 0.0.0.9000
 Authors@R: 
     person(given = "June",
@@ -8,11 +8,13 @@ Authors@R:
            email = "jchoe001@gmail.com",
            comment = c(ORCID = "0000-0002-0701-921X"))
 Description: What the package does (one paragraph).
-License: `use_mit_license()`, `use_gpl3_license()` or friends to
-    pick a license
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
 URL: https://github.com/yjunechoe/junebug
 BugReports: https://github.com/yjunechoe/junebug/issues
+Imports: 
+    magrittr,
+    rlang
