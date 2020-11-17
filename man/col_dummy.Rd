@@ -20,6 +20,11 @@ A \code{data.frame}. A tibble passed into \code{data} is returned as a tibble.
 Apply explicit dummy coding to a data frame
 }
 \examples{
+# column name can be quoted or unquoted
 col_dummy(iris, "Species", reference = "virginica")
 col_dummy(iris, Species, reference = "virginica")
+
+# model interpretation is the same
+lm(Sepal.Length ~ Species, data = iris)
+lm(Sepal.Length ~ Speciesversicolor + Speciesvirginica, data = col_dummy(iris, Species))
 }
