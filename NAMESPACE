@@ -2,5 +2,8 @@
 
 export("%+%")
 export("%>%")
+export(col_dummy)
+export(sos)
 export(str2)
+import(data.table)
 importFrom(magrittr,"%>%")

@@ -10,6 +10,7 @@
 #' @export
 #'
 #' @examples
+#' str2(list("Hello", list(", ", list("world!"))))
 str2 <- function(obj)
 {
   branch      <- "\u251c\u2500\u2500\u2500\u2500"

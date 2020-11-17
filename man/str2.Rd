@@ -18,3 +18,6 @@ From stackoverflow answer - https://stackoverflow.com/questions/62970933/how-to-
 \details{
 For printing the structure of dataframes with list columns, it's useful to pass in just the first row if you know the elements of the list column are of the same type
 }
+\examples{
+str2(list("Hello", list(", ", list("world!"))))
+}
