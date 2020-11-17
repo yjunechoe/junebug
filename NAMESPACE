@@ -3,6 +3,7 @@
 export("%+%")
 export("%>%")
 export(col_dummy)
+export(junebug_palettes)
 export(sos)
 export(str2)
 import(data.table)
