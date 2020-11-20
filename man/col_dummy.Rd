@@ -7,7 +7,7 @@
 col_dummy(data, factor, reference = NULL)
 }
 \arguments{
-\item{data}{A data frame}
+\item{data}{A data frame to be passed in (e.g., via piping)}
 
 \item{factor}{A name of a factor column. Can be quoted or unquoted}
 

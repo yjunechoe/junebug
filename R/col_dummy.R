@@ -2,7 +2,7 @@
 #'
 #' @import data.table
 #'
-#' @param data A data frame
+#' @param data A data frame to be passed in (e.g., via piping)
 #' @param factor A name of a factor column. Can be quoted or unquoted
 #' @param reference A string of the level that should be coded as the reference level. Defaults to the first level of the factor if one is not provided.
 #'
