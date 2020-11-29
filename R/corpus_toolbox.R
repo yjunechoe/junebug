@@ -8,6 +8,7 @@
 #' @export
 #'
 #' @examples
+#'
 tokens_flatten <- function(data, token_col, ...) {
   data %>%
     dplyr::group_by(...) %>%

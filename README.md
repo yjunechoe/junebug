@@ -34,7 +34,7 @@ commonly known as **June Bugs** or **June Beetles**.
 
 ### CubanMay
 
-<img src="img/cuban may.jpg" width="300" style="display: block; margin: auto;" />
+<img src="img/cuban_may.jpg" width="300" style="display: block; margin: auto;" />
 
 <img src="README_files/figure-markdown_strict/unnamed-chunk-6-1.png" style="display: block; margin: auto;" />
 
