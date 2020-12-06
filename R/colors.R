@@ -4,7 +4,7 @@
 junebug_palettes <- list(
   CranberryWhiteGrub = c("#56212A", "#844F4B", "#D785B5FF", "#5E3866"),
   CubanMay = c("#D9C091", "#8C7251", "#8C3211", "#591202", "#291F16"),
-  Mican = c("#DABBAD", "#A18075", "#603E34", "#411E16", "#401201")
+  Mican = c("#DABBAD", "#A18075", "#714F45", "#52322C", "#401201")
 )
 
 #' Selects colors from a palette
