@@ -6,9 +6,6 @@
 \usage{
 sos()
 }
-\value{
-
-}
 \description{
 Grabs last error message and searches it on stackoverflow.com
 }

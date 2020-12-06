@@ -32,14 +32,20 @@ commonly known as **June Bugs** or **June Beetles**.
 
 <img src="README_files/figure-markdown_strict/unnamed-chunk-4-1.png" style="display: block; margin: auto;" />
 
+![](README_files/figure-markdown_strict/unnamed-chunk-5-1.png)
+
 ### CubanMay
 
 <img src="img/cuban_may.jpg" width="300" style="display: block; margin: auto;" />
 
-<img src="README_files/figure-markdown_strict/unnamed-chunk-6-1.png" style="display: block; margin: auto;" />
+<img src="README_files/figure-markdown_strict/unnamed-chunk-7-1.png" style="display: block; margin: auto;" />
+
+![](README_files/figure-markdown_strict/unnamed-chunk-8-1.png)
 
 ### Mican
 
 <img src="img/mican.jpg" width="300" style="display: block; margin: auto;" />
 
-<img src="README_files/figure-markdown_strict/unnamed-chunk-8-1.png" style="display: block; margin: auto;" />
+<img src="README_files/figure-markdown_strict/unnamed-chunk-10-1.png" style="display: block; margin: auto;" />
+
+![](README_files/figure-markdown_strict/unnamed-chunk-11-1.png)

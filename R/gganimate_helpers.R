@@ -41,12 +41,12 @@ split_track <- function(df, grouping_var, tracked_along, ..., tracked_groups = "
   region <- df %>%
     dplyr::filter(...) %>%
     dplyr::group_by({{ grouping_var }}) %>%
-    dplyr::mutate(row_id = 1:dplyr::n()) %>%
+    dplyr::mutate("row_id" = 1:dplyr::n()) %>%
     dplyr::ungroup() %>%
-    dplyr::select(row_id, {{ grouping_var }}, {{ tracked_along }})
+    dplyr::select("row_id", {{ grouping_var }}, {{ tracked_along }})
   region_wide <- region %>%
     tidyr::pivot_wider(names_from = {{ grouping_var }}, values_from = {{ tracked_along }}) %>%
-    dplyr::select(-row_id)
+    dplyr::select(-"row_id")
 
   if (tracked_groups == ".all") {
     tracked_groups <- names(region_wide)

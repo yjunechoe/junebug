@@ -5,7 +5,7 @@
 \alias{junebug_palettes}
 \title{Complete list of palettes}
 \format{
-An object of class \code{list} of length 4.
+An object of class \code{list} of length 3.
 }
 \usage{
 junebug_palettes

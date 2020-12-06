@@ -19,6 +19,3 @@ A data frame of grouping variables and utterances
 \description{
 Reconstruct utterances from observations of tokens in tidy format
 }
-\examples{
-
-}

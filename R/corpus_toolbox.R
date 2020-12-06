@@ -6,9 +6,6 @@
 #'
 #' @return A data frame of grouping variables and utterances
 #' @export
-#'
-#' @examples
-#'
 tokens_flatten <- function(data, token_col, ...) {
   data %>%
     dplyr::group_by(...) %>%

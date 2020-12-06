@@ -2,7 +2,6 @@
 #'
 #' Grabs last error message and searches it on stackoverflow.com
 #'
-#' @return
 #' @export
 #'
 #' @examples

@@ -2,6 +2,7 @@
 
 export("%>%")
 export(col_dummy)
+export(junebug_palette)
 export(junebug_palettes)
 export(sos)
 export(split_track)
