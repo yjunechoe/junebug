@@ -30,7 +30,7 @@ col_dummy <- function(data, factor, reference = NULL) {
   new_cols <- paste0(factor_text, vals)
 
   df <- as.data.table(data)
-  df[, (new_cols) := lapply(vals, function(x) ifelse(factor_vec == x, 1, 0))]
+  df[, (new_cols) := lapply(vals, function(x) as.integer(factor_vec == x))]
   df <- dplyr::select(df, -{{factor}})
 
   if (tibble::is_tibble(data)) {df <- tibble::as_tibble(df)}
