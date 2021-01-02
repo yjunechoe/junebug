@@ -23,4 +23,7 @@ Imports:
     tibble,
     purrr,
     tidyr,
-    ggplot2
+    ggplot2,
+    magick,
+    grDevices,
+    stringr
