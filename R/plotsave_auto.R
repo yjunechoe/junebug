@@ -43,6 +43,6 @@ ggsave_auto <- function(folder = "ggsaveauto_img", n_pad = 3, padding = stringr:
       }
     }
     plot(magick::image_read(paste0(folder, '/', img_prefix, padding, img_ext)))
-    grDevices::dev.set(grDevices::dev.list()["RStudioGD"][[1]])
+    grDevices::dev.set(2)
   }
 }
