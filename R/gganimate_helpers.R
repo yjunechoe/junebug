@@ -2,8 +2,6 @@
 #'
 #' To be used with transition_reveal()
 #'
-#' @import rlang
-#'
 #' @param df data frame
 #' @param grouping_var column of the grouping variable used to split the data
 #' @param tracked_along column of the tracking dimension to be passed into
@@ -56,8 +54,8 @@ split_track <- function(df, grouping_var, tracked_along, ..., tracked_groups = "
       dplyr::select(-{{ tracked_groups }})
   }
 
-  grouping_var_enquo <- enquo(grouping_var)
-  tracked_along_enquo <- enquo(tracked_along)
+  grouping_var_enquo <- rlang::enquo(grouping_var)
+  tracked_along_enquo <- rlang::enquo(tracked_along)
 
   region_split <- dplyr::bind_rows(
     untracked,
@@ -70,18 +68,19 @@ split_track <- function(df, grouping_var, tracked_along, ..., tracked_groups = "
     ) %>%
     tidyr::pivot_longer(
       dplyr::everything(),
-      names_to = quo_text(grouping_var_enquo),
-      values_to = quo_text(tracked_along_enquo)
+      names_to = rlang::quo_text(grouping_var_enquo),
+      values_to = rlang::quo_text(tracked_along_enquo)
     )
 
-  df %>%
-    dplyr::anti_join(dplyr::filter(df, ...)) %>%
-    dplyr::bind_rows(
-      region_split %>%
-        dplyr::inner_join(df)
-    ) %>%
-    dplyr::group_by({{ grouping_var }}) %>%
-    dplyr::mutate(!!tracked_along_enquo := dplyr::row_number()) %>%
-    dplyr::ungroup()
-
+  suppressMessages({
+    df %>%
+      dplyr::anti_join(dplyr::filter(df, ...)) %>%
+      dplyr::bind_rows(
+        region_split %>%
+          dplyr::inner_join(df)
+      ) %>%
+      dplyr::group_by({{ grouping_var }}) %>%
+      dplyr::mutate(!!tracked_along_enquo := dplyr::row_number()) %>%
+      dplyr::ungroup()
+  })
 }

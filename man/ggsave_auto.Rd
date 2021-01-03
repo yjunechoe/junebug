@@ -13,7 +13,7 @@ ggsave_auto(
   width = 20,
   height = 12,
   unit = "cm",
-  plot_after = TRUE,
+  plot_load = "app",
   ...
 )
 }
@@ -34,7 +34,7 @@ ggsave_auto(
 
 \item{unit}{Passed to \code{ggsave()}}
 
-\item{plot_after}{If \code{true}, reads in the saved plot to an external graphic device window.}
+\item{plot_load}{Options for loading the saved plot for viewing. One of \code{c("app", "rstudio", "none")}.}
 
 \item{...}{Passed to \code{ggsave()}}
 }
