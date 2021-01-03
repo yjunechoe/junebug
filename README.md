@@ -1,3 +1,14 @@
+-   [`junebug` Package](#junebug-package)
+    -   [Installation and usage](#installation-and-usage)
+-   [Highlights](#highlights)
+    -   [Palettes](#palettes)
+    -   [`ggsave_auto()` - Accumulate multiple versions of a
+        plot](#ggsave_auto---accumulate-multiple-versions-of-a-plot)
+    -   [`split_track()` - Track groups individually over a region of
+        time](#split_track---track-groups-individually-over-a-region-of-time)
+    -   [`col_dummy()` - Add dummy coded variables as
+        columns](#col_dummy---add-dummy-coded-variables-as-columns)
+
 `junebug` Package
 =================
 
@@ -10,13 +21,10 @@ visualization](https://yjunechoe.github.io/posts/2020-10-13-designing-guiding-ae
 To some extent, this package was made for personal use, so keep in mind
 that it’s currently not designed to be light on dependencies.
 
-Installation
-------------
+Installation and usage
+----------------------
 
     devtools::install_github("yjunechoe/junebug")
-
-Usage
------
 
 When using `{junebug}`, is highly recommended to also load the
 `{tidyverse}` set of packages (specifically, `{dplyr}`, `{tibble}`,
@@ -104,8 +112,8 @@ quality issues).
 
 **depends**: package `{rlang}`
 
-The `split_track()` is a helper function for `{gganimate}`, designed for
-use with the `transition_reveal()` engine.
+`split_track()` is a helper function for `{gganimate}`, designed for use
+with the `transition_reveal()` engine.
 
 `split_track()` can be used for a special case of plotting *change in a
 variable (y-axis) over time (x-axis)* (e.g., line graphs), where you
@@ -144,8 +152,9 @@ whose `value` changes over `time` (ranging from 1 to 100).
     ## # ... with 390 more rows
 
 With this data, `transition_reveal()` would animate the trajcetory of
-all groups simultaneously. If we want to split each group and track them
-individually over a specified region, we can do the following:
+all groups simultaneously. If we want to track each group individually
+over a region (say, where `x` is greater than or equal to `75`), we can
+do the following:
 
     library(gganimate)
 
@@ -161,10 +170,10 @@ individually over a specified region, we can do the following:
 ![](README_files/figure-markdown_strict/unnamed-chunk-15-1.gif)
 
 You can also specify which groups get tracked individually, using the
-`tracked_groups` argument. Here, we also change the grouping variable to
-a `factor` and specify the ordering of the levels to make sure that the
-lines that are revealed later are drawn over lines that are revealed
-earlier.
+`tracked_groups` argument. In the following code, we also change the
+grouping variable to a `factor` and specify the ordering of the levels
+to make sure that the lines that are revealed later are drawn over lines
+that are revealed earlier.
 
     split_anim2 <- plot_df %>%
       split_track(grouping_var = name, tracked_along = reveal_time, x >= 75, tracked_groups = c('a', 'c')) %>%
@@ -183,11 +192,11 @@ earlier.
 
 **depends**: package `{data.table}`
 
-Given a column containing `n` distinct levels, produces `n-` new columns
-that treatment code each level except the reference level. This is
-useful for some packages which do not work with implicit coding in the
-`factor` datatype (e.g., the `{lavaan}` package for structural equation
-modeling)
+Given a column containing `n` distinct levels, `col_dummy()` produces
+`n-1` new columns that treatment code each level except the reference
+level. This explicit coding is necessary for some packages which do not
+work with implicit coding in R’s `factor` data type (e.g., the
+`{lavaan}` package for structural equation modeling)
 
     levels(iris$Species)
 
@@ -214,7 +223,7 @@ modeling)
     ## 5                 0
     ## 6                 0
 
-Model output is the same:
+Note that the model output is the same:
 
     lm(Sepal.Length ~ Species, data = iris) # implicit coding
 
@@ -226,7 +235,7 @@ Model output is the same:
     ##       (Intercept)  Speciesversicolor   Speciesvirginica  
     ##             5.006              0.930              1.582
 
-    lm(Sepal.Length ~ Speciesversicolor + Speciesvirginica, data = col_dummy(iris, Species)) # explicit coding with `col_dummy()`
+    lm(Sepal.Length ~ Speciesversicolor + Speciesvirginica, data = col_dummy(iris, Species)) # explicit coding
 
     ## The reference level of 'Species' is 'setosa'
 
