@@ -46,7 +46,7 @@ split_track <- function(df, grouping_var, tracked_along, ..., tracked_groups = "
     tidyr::pivot_wider(names_from = {{ grouping_var }}, values_from = {{ tracked_along }}) %>%
     dplyr::select(-"row_id")
 
-  if (tracked_groups == ".all") {
+  if (length(tracked_groups) == 1 && tracked_groups == ".all") {
     tracked_groups <- names(region_wide)
     untracked <- NULL
   } else {
