@@ -1,7 +1,8 @@
--   [`junebug` Package](#junebug-package)
+-   [**junebug** Package](#junebug-package)
     -   [Installation and usage](#installation-and-usage)
 -   [Highlights](#highlights)
     -   [Palettes](#palettes)
+    -   [Themes](#themes)
     -   [`ggsave_auto()` - Accumulate multiple versions of a
         plot](#ggsave_auto---accumulate-multiple-versions-of-a-plot)
     -   [`split_track()` - Track groups individually over a region of
@@ -9,8 +10,8 @@
     -   [`col_dummy()` - Add dummy coded variables as
         columns](#col_dummy---add-dummy-coded-variables-as-columns)
 
-`junebug` Package
-=================
+**junebug** Package
+===================
 
 A hodge-podge of functions for various uses, from interactive debugging
 to preparing data for modeling. The name of the package comes from my
@@ -72,6 +73,219 @@ commonly known as **June Bugs** or **June Beetles**.
 
 ![](README_files/figure-markdown_strict/unnamed-chunk-11-1.png)
 
+Themes
+------
+
+**depends**: packages `{ggplot2}` and `{ggtext}`
+
+Also need to have some fonts enabled/imported in R (`{extrafont}` or
+`{showtext}` recommended)
+
+### `theme_junebug_calm`
+
+Fonts: Roboto, Roboto Slab
+
+    ggplot(iris, aes(Petal.Length, Petal.Width, color = Species)) +
+      geom_point(size = 2) +
+      theme_junebug_calm() +
+      labs(
+        title = "Petal profile of plant species in the iris dataset",
+        subtitle = "Virginica has the largest petal of the three species"
+      ) +
+      scale_color_manual(values = junebug_palette("CubanMay", 3)) +
+      facet_wrap(~ Species)
+
+<img src="img/junebug_calm.png" width="8640" />
+
+### `theme_junebug_clean`
+
+Fonts: Roboto, Roboto Slab
+
+    ggplot(iris, aes(Petal.Length, Petal.Width, color = Species)) +
+      geom_point(size = 2) +
+      theme_junebug_clean() +
+      labs(
+        title = "Petal profile of plant species in the iris dataset",
+        subtitle = "Virginica has the largest petal of the three species"
+      ) +
+      scale_color_manual(values = junebug_palette("CranberryWhiteGrub", 3)) +
+      facet_wrap(~ Species)
+
+    ## Warning in grid.Call(C_stringMetric, as.graphicsAnnot(x$label)): font family not
+    ## found in Windows font database
+
+    ## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
+    ## family not found in Windows font database
+
+    ## Warning in grid.Call(C_stringMetric, as.graphicsAnnot(x$label)): font family not
+    ## found in Windows font database
+
+    ## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
+    ## family not found in Windows font database
+
+    ## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
+    ## family not found in Windows font database
+
+    ## Warning in grid.Call(C_stringMetric, as.graphicsAnnot(x$label)): font family not
+    ## found in Windows font database
+
+    ## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
+    ## family not found in Windows font database
+
+    ## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
+    ## family not found in Windows font database
+
+    ## Warning in grid.Call(C_stringMetric, as.graphicsAnnot(x$label)): font family not
+    ## found in Windows font database
+
+    ## Warning in grid.Call(C_stringMetric, as.graphicsAnnot(x$label)): font family not
+    ## found in Windows font database
+
+    ## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
+    ## family not found in Windows font database
+
+    ## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
+    ## family not found in Windows font database
+
+    ## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
+    ## family not found in Windows font database
+
+    ## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
+    ## family not found in Windows font database
+
+    ## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
+    ## family not found in Windows font database
+
+    ## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
+    ## family not found in Windows font database
+
+    ## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
+    ## family not found in Windows font database
+
+    ## Warning in grid.Call.graphics(C_text, as.graphicsAnnot(x$label), x$x, x$y, :
+    ## font family not found in Windows font database
+
+    ## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
+    ## family not found in Windows font database
+
+    ## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
+    ## family not found in Windows font database
+
+    ## Warning in grid.Call.graphics(C_text, as.graphicsAnnot(x$label), x$x, x$y, :
+    ## font family not found in Windows font database
+
+    ## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
+    ## family not found in Windows font database
+
+    ## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
+    ## family not found in Windows font database
+
+    ## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
+    ## family not found in Windows font database
+
+    ## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
+    ## family not found in Windows font database
+
+![](README_files/figure-markdown_strict/unnamed-chunk-14-1.png)
+
+<img src="img/junebug_clean.png" width="8640" />
+
+### `theme_junebug_compact`
+
+Fonts: Barlow Condensed, Futura Bk BT, Roboto Condensed
+
+    ggplot(iris, aes(Petal.Length, Petal.Width, color = Species)) +
+      geom_point(size = 2) +
+      theme_junebug_compact() +
+      labs(
+        title = "Petal profile of plant species in the iris dataset",
+        subtitle = "Virginica has the largest petal of the three species"
+      ) +
+      scale_color_manual(values = junebug_palette("CranberryWhiteGrub", 3)) +
+      facet_wrap(~ Species)
+
+    ## Warning in grid.Call(C_stringMetric, as.graphicsAnnot(x$label)): font family not
+    ## found in Windows font database
+
+    ## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
+    ## family not found in Windows font database
+
+    ## Warning in grid.Call(C_stringMetric, as.graphicsAnnot(x$label)): font family not
+    ## found in Windows font database
+
+    ## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
+    ## family not found in Windows font database
+
+    ## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
+    ## family not found in Windows font database
+
+    ## Warning in grid.Call(C_stringMetric, as.graphicsAnnot(x$label)): font family not
+    ## found in Windows font database
+
+    ## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
+    ## family not found in Windows font database
+
+    ## Warning in grid.Call(C_stringMetric, as.graphicsAnnot(x$label)): font family not
+    ## found in Windows font database
+
+    ## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
+    ## family not found in Windows font database
+
+    ## Warning in grid.Call(C_stringMetric, as.graphicsAnnot(x$label)): font family not
+    ## found in Windows font database
+
+    ## Warning in grid.Call(C_stringMetric, as.graphicsAnnot(x$label)): font family not
+    ## found in Windows font database
+
+    ## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
+    ## family not found in Windows font database
+
+    ## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
+    ## family not found in Windows font database
+
+    ## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
+    ## family not found in Windows font database
+
+    ## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
+    ## family not found in Windows font database
+
+    ## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
+    ## family not found in Windows font database
+
+    ## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
+    ## family not found in Windows font database
+
+    ## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
+    ## family not found in Windows font database
+
+    ## Warning in grid.Call.graphics(C_text, as.graphicsAnnot(x$label), x$x, x$y, :
+    ## font family not found in Windows font database
+
+    ## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
+    ## family not found in Windows font database
+
+    ## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
+    ## family not found in Windows font database
+
+    ## Warning in grid.Call.graphics(C_text, as.graphicsAnnot(x$label), x$x, x$y, :
+    ## font family not found in Windows font database
+
+    ## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
+    ## family not found in Windows font database
+
+    ## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
+    ## family not found in Windows font database
+
+    ## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
+    ## family not found in Windows font database
+
+    ## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
+    ## family not found in Windows font database
+
+![](README_files/figure-markdown_strict/unnamed-chunk-16-1.png)
+
+<img src="img/junebug_compact.png" width="8640" />
+
 `ggsave_auto()` - Accumulate multiple versions of a plot
 --------------------------------------------------------
 
@@ -123,6 +337,7 @@ For example, say we have this following data about four groups (`name`)
 whose `value` changes over `time` (ranging from 1 to 100).
 
     set.seed(123)
+    library(gganimate)
 
     plot_df <- tibble(
       a = cumsum(runif(100, -1, 1)),
@@ -136,38 +351,19 @@ whose `value` changes over `time` (ranging from 1 to 100).
 
     plot_df
 
-    ## # A tibble: 400 x 4
-    ##    name    value reveal_time     x
-    ##    <chr>   <dbl>       <int> <int>
-    ##  1 a     -0.425            1     1
-    ##  2 b      0.300            1     1
-    ##  3 c     -1.05             1     1
-    ##  4 d      1.42             1     1
-    ##  5 a      0.152            2     2
-    ##  6 b     -0.202            2     2
-    ##  7 c      0.804            2     2
-    ##  8 d     -1.03             2     2
-    ##  9 a     -0.0303           3     3
-    ## 10 b     -0.236            3     3
-    ## # ... with 390 more rows
-
 With this data, `transition_reveal()` would animate the trajcetory of
 all groups simultaneously. If we want to track each group individually
 over a region (say, where `x` is greater than or equal to `75`), we can
 do the following:
 
-    library(gganimate)
-
-    split_anim1 <- plot_df %>%
+    plot_df %>%
       split_track(grouping_var = name, tracked_along = reveal_time, x >= 75) %>%
       ggplot(aes(x, value, color = name)) +
       geom_line(size = 1) +
       transition_reveal(reveal_time) +
       theme_classic()
 
-    animate(split_anim1, width = 5, height = 3, units = "in", nframes = 50, res = 150)
-
-![](README_files/figure-markdown_strict/unnamed-chunk-15-1.gif)
+![](img/split_track1.gif)
 
 You can also specify which groups get tracked individually, using the
 `tracked_groups` argument. In the following code, we also change the
@@ -175,7 +371,7 @@ grouping variable to a `factor` and specify the ordering of the levels
 to make sure that the lines that are revealed later are drawn over lines
 that are revealed earlier.
 
-    split_anim2 <- plot_df %>%
+    plot_df %>%
       split_track(grouping_var = name, tracked_along = reveal_time, x >= 75, tracked_groups = c('a', 'c')) %>%
       mutate(name = factor(name, levels = c("b", "d", "a", "c"))) %>% # reordering between groups
       ggplot(aes(x, value, color = name)) +
@@ -183,9 +379,7 @@ that are revealed earlier.
       transition_reveal(reveal_time) +
       theme_classic()
 
-    animate(split_anim2, width = 5, height = 3, units = "in", nframes = 50, res = 150)
-
-![](README_files/figure-markdown_strict/unnamed-chunk-16-1.gif)
+![](img/split_track2.gif)
 
 `col_dummy()` - Add dummy coded variables as columns
 ----------------------------------------------------
