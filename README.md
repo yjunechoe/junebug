@@ -1,7 +1,6 @@
 -   [**junebug** Package](#junebug-package)
     -   [Installation and usage](#installation-and-usage)
 -   [Highlights](#highlights)
-    -   [Palettes](#palettes)
     -   [Themes](#themes)
     -   [`ggsave_auto()` - Accumulate multiple versions of a
         plot](#ggsave_auto---accumulate-multiple-versions-of-a-plot)
@@ -43,36 +42,6 @@ Highlights
 
 Some functions/capabilities of `{junebug}`
 
-Palettes
---------
-
-Color palettes inspired by beetles of the genus *phyllophaga*, more
-commonly known as **June Bugs** or **June Beetles**.
-
-### CranberryWhiteGrub
-
-<img src="img/anxia.jpg" width="300" style="display: block; margin: auto;" />
-
-<img src="README_files/figure-markdown_strict/unnamed-chunk-4-1.png" style="display: block; margin: auto;" />
-
-![](README_files/figure-markdown_strict/unnamed-chunk-5-1.png)
-
-### CubanMay
-
-<img src="img/cuban_may.jpg" width="300" style="display: block; margin: auto;" />
-
-<img src="README_files/figure-markdown_strict/unnamed-chunk-7-1.png" style="display: block; margin: auto;" />
-
-![](README_files/figure-markdown_strict/unnamed-chunk-8-1.png)
-
-### Mican
-
-<img src="img/mican.jpg" width="300" style="display: block; margin: auto;" />
-
-<img src="README_files/figure-markdown_strict/unnamed-chunk-10-1.png" style="display: block; margin: auto;" />
-
-![](README_files/figure-markdown_strict/unnamed-chunk-11-1.png)
-
 Themes
 ------
 
@@ -95,7 +64,7 @@ Fonts: Roboto, Roboto Slab
       scale_color_manual(values = junebug_palette("CubanMay", 3)) +
       facet_wrap(~ Species)
 
-<img src="img/junebug_calm.png" width="8640" />
+<img src="img/junebug_calm.png" width="2880" />
 
 ### `theme_junebug_clean`
 
@@ -111,11 +80,11 @@ Fonts: Roboto, Roboto Slab
       scale_color_manual(values = junebug_palette("CranberryWhiteGrub", 3)) +
       facet_wrap(~ Species)
 
-<img src="img/junebug_clean.png" width="8640" />
+<img src="img/junebug_clean.png" width="2880" />
 
 ### `theme_junebug_compact`
 
-Fonts: Barlow Condensed, Futura Bk BT, Roboto Condensed
+Fonts: Zilla Slab, Futura Bk BT, Roboto Condensed
 
     ggplot(iris, aes(Petal.Length, Petal.Width, color = Species)) +
       geom_point(size = 2) +
@@ -127,7 +96,7 @@ Fonts: Barlow Condensed, Futura Bk BT, Roboto Condensed
       scale_color_manual(values = junebug_palette("CranberryWhiteGrub", 3)) +
       facet_wrap(~ Species)
 
-<img src="img/junebug_compact.png" width="8640" />
+<img src="img/junebug_compact.png" width="2880" />
 
 `ggsave_auto()` - Accumulate multiple versions of a plot
 --------------------------------------------------------

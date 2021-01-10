@@ -281,7 +281,7 @@ theme_junebug_compact <- function(base_size = 12, ...) {
     ),
     plot.title = ggplot2::element_text(
       size = ggplot2::rel(2),
-      family = "Barlow Condensed",
+      family = "Zilla Slab",
       face = "bold",
       margin = ggplot2::margin(b = 0.5, unit = "cm"),
       hjust = 0
