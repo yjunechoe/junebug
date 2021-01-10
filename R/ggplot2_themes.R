@@ -17,6 +17,13 @@ theme_junebug_clean <- function(base_size = 12, ...) {
       color = "#303030",
       size = base_size
     ),
+    axis.text.x = ggplot2::element_text(
+      lineheight = 1.2,
+      margin = ggplot2::margin(t = 0.2, unit = "cm")
+    ),
+    axis.text.y = ggplot2::element_text(
+      margin = ggplot2::margin(r = 0.1, unit = "cm")
+    ),
     axis.ticks = ggplot2::element_line(
       color = "#202020"
     ),
@@ -58,6 +65,7 @@ theme_junebug_clean <- function(base_size = 12, ...) {
     plot.margin = ggplot2::margin(0.8, 0.8, 0.8, 0.8, unit = "cm"),
     plot.subtitle = ggplot2::element_text(
       size = ggplot2::rel(1.2),
+      lineheight = 1.2,
       margin = ggplot2::margin(b = .5, unit = "cm"),
       hjust = 0
     ),
@@ -101,7 +109,6 @@ theme_junebug_clean <- function(base_size = 12, ...) {
 #'
 #' @export
 theme_junebug_calm <- function(base_size = 12, ...) {
-
   ggplot2::theme(
     axis.line = ggplot2::element_line(
       color = "#101010"
@@ -110,6 +117,13 @@ theme_junebug_calm <- function(base_size = 12, ...) {
       face = "bold",
       color = "#202020",
       size = base_size
+    ),
+    axis.text.x = ggplot2::element_text(
+      lineheight = 1.2,
+      margin = ggplot2::margin(t = 0.2, unit = "cm")
+    ),
+    axis.text.y = ggplot2::element_text(
+      margin = ggplot2::margin(r = 0.1, unit = "cm")
     ),
     axis.ticks = ggplot2::element_line(
       color = "#101010"
@@ -160,6 +174,7 @@ theme_junebug_calm <- function(base_size = 12, ...) {
     plot.margin = ggplot2::margin(0.8, 0.8, 0.8, 0.8, unit = "cm"),
     plot.subtitle = ggplot2::element_text(
       size = ggplot2::rel(1.2),
+      lineheight = 1.2,
       margin = ggplot2::margin(b = .5, unit = "cm"),
       hjust = 0
     ),
@@ -202,7 +217,6 @@ theme_junebug_calm <- function(base_size = 12, ...) {
 #'
 #' @export
 theme_junebug_compact <- function(base_size = 12, ...) {
-
   ggplot2::theme(
     axis.line = ggplot2::element_line(
       color = "#202020"
@@ -212,6 +226,13 @@ theme_junebug_compact <- function(base_size = 12, ...) {
       family = "Futura Bk BT",
       color = "#303030",
       size = base_size
+    ),
+    axis.text.x = ggplot2::element_text(
+      lineheight = 1.2,
+      margin = ggplot2::margin(t = 0.2, unit = "cm")
+    ),
+    axis.text.y = ggplot2::element_text(
+      margin = ggplot2::margin(r = 0.1, unit = "cm")
     ),
     axis.ticks = ggplot2::element_line(
       color = "#202020"
@@ -254,6 +275,7 @@ theme_junebug_compact <- function(base_size = 12, ...) {
     plot.margin = ggplot2::margin(0.8, 0.8, 0.8, 0.8, unit = "cm"),
     plot.subtitle = ggplot2::element_text(
       size = ggplot2::rel(1.2),
+      lineheight = 1.2,
       margin = ggplot2::margin(b = .5, unit = "cm"),
       hjust = 0
     ),
