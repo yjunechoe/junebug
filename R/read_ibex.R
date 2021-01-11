@@ -2,10 +2,11 @@
 #'
 #' @param results_file The exact text of the `results` file as downloaded from IBEX
 #' @param external Is the results file a path to a downloaded file? Set to `FALSE` if the results are formatted as lines of characters.
+#' @param simplify Should the processed results be simplified to a single dataframe, joined on the first 7 variables that are always returned by IBEX?
 #'
 #' @return A data frame if the controller writes a single line to the results file (e.g., "DashedSentence") OR a list of data frames if the controller writes more than one line to the results file (e.g., "AcceptabilityJudgment"). Check the \href{https://github.com/addrummond/ibex/blob/master/docs/manual.md}{IBEX documentation} for more details.
 #' @export
-read_ibex <- function(results_file, external = TRUE) {
+read_ibex <- function(results_file, external = TRUE, simplify = TRUE) {
 
   if (external) {
     raw_lines <- readLines(results_file, warn = FALSE)
@@ -43,7 +44,11 @@ read_ibex <- function(results_file, external = TRUE) {
   if (length(results) == 1L) {
     results[[1L]]
   } else{
-    results
+    if (simplify) {
+      Reduce(function(left, right) {merge(left, right, by = 1:7)}, results)
+    } else {
+      results
+    }
   }
 
 }
