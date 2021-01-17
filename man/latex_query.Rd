@@ -4,7 +4,13 @@
 \alias{latex_query}
 \title{Generate a CodeCogs URL that renders latex as image}
 \usage{
-latex_query(formula, size = "normal", dpi = 300, inline = FALSE)
+latex_query(
+  formula,
+  size = "normal",
+  dpi = 300,
+  transparent = FALSE,
+  inline = FALSE
+)
 }
 \arguments{
 \item{formula}{An appropriately escaped string of LaTex formula. Using the new string literal syntax \code{r"(...)"} from R 4.0.0 on the existing formula is recommended.}
@@ -12,6 +18,8 @@ latex_query(formula, size = "normal", dpi = 300, inline = FALSE)
 \item{size}{Font size. One of "tiny", "small", "normal", "large", or "huge"}
 
 \item{dpi}{Image resolution. Defaults to 300}
+
+\item{transparent}{Should the background be transparent? Defaults to \code{FALSE}, which adds a white background.}
 
 \item{inline}{Render as inline formula? If TRUE, results in a more compact image.}
 }
