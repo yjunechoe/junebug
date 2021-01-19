@@ -11,7 +11,7 @@ icon_html(icon, type = "solid", unicode = TRUE)
 
 \item{type}{One of "brand", "regular", and "solid"}
 
-\item{unicode}{Should it return the unicode value for the icon wrapped in <span>? If \code{FALSE}, returns the icon class wrapped in <i>}
+\item{unicode}{Should it return the unicode value for the icon wrapped in the \code{span} tag? If \code{FALSE}, returns the icon class wrapped in the \code{i} tag}
 }
 \value{
 A character vector of matches in the specified format

@@ -28,4 +28,5 @@ Imports:
     magick,
     grDevices,
     stringr,
-    ggtext
+    ggtext,
+    ragg

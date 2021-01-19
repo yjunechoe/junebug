@@ -27,7 +27,7 @@ latex_query(
 A character string of the URL
 }
 \description{
-Interactive version at https://www.codecogs.com/latex/eqneditor.php
+Interactive version at \verb{https://www.codecogs.com/latex/eqneditor.php}
 }
 \examples{
 \dontrun{

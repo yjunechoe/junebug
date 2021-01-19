@@ -1,6 +1,6 @@
 #' Generate a CodeCogs URL that renders latex as image
 #'
-#' Interactive version at https://www.codecogs.com/latex/eqneditor.php
+#' Interactive version at `https://www.codecogs.com/latex/eqneditor.php`
 #'
 #' @param formula An appropriately escaped string of LaTex formula. Using the new string literal syntax `r"(...)"` from R 4.0.0 on the existing formula is recommended.
 #' @param size Font size. One of "tiny", "small", "normal", "large", or "huge"
@@ -33,7 +33,7 @@ latex_query <- function(formula, size = "normal", dpi = 300, transparent = FALSE
 #'
 #' @param icon A character string that matches one or more Font Awesome icon names
 #' @param type One of "brand", "regular", and "solid"
-#' @param unicode Should it return the unicode value for the icon wrapped in <span>? If `FALSE`, returns the icon class wrapped in <i>
+#' @param unicode Should it return the unicode value for the icon wrapped in the `span` tag? If `FALSE`, returns the icon class wrapped in the `i` tag
 #'
 #' @return A character vector of matches in the specified format
 #' @export
