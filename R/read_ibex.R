@@ -1,10 +1,3 @@
-####
-##
-## Script by June Choe
-## Last updated 01/2021
-##
-####
-
 #' Parse IBEX results file in Tidy format
 #'
 #' @param results_file Path to the downloaded results file.
@@ -15,7 +8,7 @@
 read_ibex <- function(results_file, clipboard = FALSE) {
 
   raw_lines <- if (clipboard) {
-    readClipboard()
+    utils::readClipboard()
   } else {
     readLines(results_file, warn = FALSE)
   }

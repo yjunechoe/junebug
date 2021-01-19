@@ -28,3 +28,32 @@ latex_query <- function(formula, size = "normal", dpi = 300, transparent = FALSE
     utils::URLencode(formula, reserved = TRUE)
   )
 }
+
+#' Find a Font Awesome icon in the appropriate html format
+#'
+#' @param icon A character string that matches one or more Font Awesome icon names
+#' @param type One of "brand", "regular", and "solid"
+#' @param unicode Should it return the unicode value for the icon wrapped in <span>? If `FALSE`, returns the icon class wrapped in <i>
+#'
+#' @return A character vector of matches in the specified format
+#' @export
+icon_html <- function(icon, type = "solid", unicode = TRUE) {
+  icon_table <- utils::read.csv("https://yjunechoe.netlify.app/data/fa_table.csv")
+  type <- switch(
+    type,
+    "brand" = "Brands Regular",
+    "regular" = "Free Regular",
+    "solid" = "Free Sollid",
+    stop("type must be one of c('brand', 'regular', 'solid')")
+  )
+  matched <- icon_table[(grepl(icon, icon_table$icon)),]
+  if (nrow(matched) > 0) {
+    if (unicode) {
+      stats::setNames(paste0("<span style='font-family: \"Font Awesome 5 ", type, "\"'>", matched$unicode , "</span>"),  matched$icon)
+    } else {
+      paste0("<i class='", matched$icon, "'</i>")
+    }
+  } else {
+    stop(paste("No match found for", icon, "in", "Font Awesome 5", type))
+  }
+}

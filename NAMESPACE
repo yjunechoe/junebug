@@ -3,6 +3,7 @@
 export("%>%")
 export(col_dummy)
 export(ggsave_auto)
+export(icon_html)
 export(junebug_palette)
 export(junebug_palettes)
 export(latex_query)
