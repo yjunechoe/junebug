@@ -4,17 +4,15 @@
 \alias{icon_html}
 \title{Find a Font Awesome icon in the appropriate html format}
 \usage{
-icon_html(icon, type = "solid", unicode = TRUE)
+icon_html(icon, type = "css")
 }
 \arguments{
 \item{icon}{A character string that matches one or more Font Awesome icon names}
 
-\item{type}{One of "brand", "regular", and "solid"}
-
-\item{unicode}{Should it return the unicode value for the icon wrapped in the \code{span} tag? If \code{FALSE}, returns the icon class wrapped in the \code{i} tag}
+\item{type}{"css" returns the icon wrapped in \code{span}; "class" returns the icon wrapped in \code{i}}
 }
 \value{
-A character vector of matches in the specified format
+The first icon match in the specified format
 }
 \description{
 Find a Font Awesome icon in the appropriate html format
