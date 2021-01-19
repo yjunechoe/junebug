@@ -2,20 +2,18 @@
 % Please edit documentation in R/read_ibex.R
 \name{read_ibex}
 \alias{read_ibex}
-\title{Reads in the \code{results} file from an IBEX experiment as data frame}
+\title{Parse IBEX results file in Tidy format}
 \usage{
-read_ibex(results_file, external = TRUE, simplify = TRUE)
+read_ibex(results_file, clipboard = FALSE)
 }
 \arguments{
-\item{results_file}{The exact text of the \code{results} file as downloaded from IBEX}
+\item{results_file}{Path to the downloaded results file.}
 
-\item{external}{Is the results file a path to a downloaded file? Set to \code{FALSE} if the results are formatted as lines of characters.}
-
-\item{simplify}{Should the processed results be simplified to a single dataframe, joined on the first 7 variables that are always returned by IBEX?}
+\item{clipboard}{Read results from clipboard? If \code{TRUE}, do not need to supply argument for \code{results_file}.}
 }
 \value{
-A data frame if the controller writes a single line to the results file (e.g., "DashedSentence") OR a list of data frames if the controller writes more than one line to the results file (e.g., "AcceptabilityJudgment"). Check the \href{https://github.com/addrummond/ibex/blob/master/docs/manual.md}{IBEX documentation} for more details.
+A single data frame containing all variables present as columns
 }
 \description{
-Reads in the \code{results} file from an IBEX experiment as data frame
+Parse IBEX results file in Tidy format
 }

@@ -1,54 +1,122 @@
-#' Reads in the `results` file from an IBEX experiment as data frame
+####
+##
+## Script by June Choe
+## Last updated 01/2021
+##
+####
+
+#' Parse IBEX results file in Tidy format
 #'
-#' @param results_file The exact text of the `results` file as downloaded from IBEX
-#' @param external Is the results file a path to a downloaded file? Set to `FALSE` if the results are formatted as lines of characters.
-#' @param simplify Should the processed results be simplified to a single dataframe, joined on the first 7 variables that are always returned by IBEX?
+#' @param results_file Path to the downloaded results file.
+#' @param clipboard Read results from clipboard? If `TRUE`, do not need to supply argument for `results_file`.
 #'
-#' @return A data frame if the controller writes a single line to the results file (e.g., "DashedSentence") OR a list of data frames if the controller writes more than one line to the results file (e.g., "AcceptabilityJudgment"). Check the \href{https://github.com/addrummond/ibex/blob/master/docs/manual.md}{IBEX documentation} for more details.
+#' @return A single data frame containing all variables present as columns
 #' @export
-read_ibex <- function(results_file, external = TRUE, simplify = TRUE) {
+read_ibex <- function(results_file, clipboard = FALSE) {
 
-  if (external) {
-    raw_lines <- readLines(results_file, warn = FALSE)
+  raw_lines <- if (clipboard) {
+    readClipboard()
   } else {
-    raw_lines <- results_file
+    readLines(results_file, warn = FALSE)
   }
 
-  data_lines <- raw_lines[!grepl("^(#| )", raw_lines)]
-  comments <- raw_lines[grepl("^(#| )", raw_lines)]
-  col_specs <- comments[grepl("(Col\\. \\d+:|^# \\d+\\. )", comments)]
-
-  col_groups <- list()
-  for (i in 1L:length(col_specs)) {
-    if (i == 1L) {
-      col_groups[[1L]] <- col_specs[i]
-    }
-    else if (i == length(col_specs) | (i < length(col_specs) && !grepl("(Col\\. 1:|^# 1\\. )", col_specs[i]))) {
-      col_groups[[length(col_groups)]] <- c(col_groups[[length(col_groups)]], col_specs[i])
+  data_compact <- raw_lines[!grepl("^#$", raw_lines)]
+  data_breaks <- which(grepl("^# Results on", data_compact))
+  data_chunks <- lapply(1L:length(data_breaks), function(x) {
+    subject_lines <- if (x == length(data_breaks)) {
+      data_breaks[x]:length(data_compact)
     } else {
-      col_groups[[length(col_groups) + 1L]] <- col_specs[i]
+      data_breaks[x]:(data_breaks[x+1L] - 1L)
     }
-  }
-
-  col_groups <- lapply(unique(col_groups), function(x) gsub("(^# +Col\\. \\d+: |^# \\d+\\. |\\.$)", "", x))
-  data_groups <- lapply(1L:length(col_groups), function(x) {
-    data_lines[rep(1L:length(col_groups), length.out = length(data_lines)) == x]
+    data_compact[subject_lines]
   })
 
-  results <- lapply(1L:length(data_groups), function(x) {
-    data_group <- data.frame(matrix(unlist(strsplit(data_groups[[x]], ",")), nrow = length(data_groups[[x]]), byrow = TRUE))
-    colnames(data_group) <- col_groups[[x]]
-    data_group
+
+  read_ibex_ <- function(raw_lines) {
+
+    data_lines <- raw_lines[!grepl("^(#| )", raw_lines)]
+    comments <- raw_lines[grepl("^(#| )", raw_lines)]
+    col_specs <- comments[grepl("(Col\\. \\d+:|^# \\d+\\. )", comments)]
+
+    col_groups <- list()
+    for (i in 1L:length(col_specs)) {
+      if (i == 1L) {
+        col_groups[[1L]] <- col_specs[i]
+      }
+      else if (i == length(col_specs) | (i < length(col_specs) && !grepl("(Col\\. 1:|^# 1\\. )", col_specs[i]))) {
+        col_groups[[length(col_groups)]] <- c(col_groups[[length(col_groups)]], col_specs[i])
+      } else {
+        col_groups[[length(col_groups) + 1L]] <- col_specs[i]
+      }
+    }
+
+    col_nested <- unlist(lapply(col_groups, function(x) { all(unlist(lapply(x, function(y) { grepl("Col\\.", y) }))) }))
+    col_groups <- lapply(col_groups, function(x) { gsub("(^# +Col\\. \\d+: |^# \\d+\\. |\\.$)", "", x) })
+
+    col_nested_rle <- rle(col_nested)
+    col_group_bins <- unlist(lapply(1L:length(col_nested_rle$values), function(x) {
+      if (!col_nested_rle$values[x]) {
+        x:(x+col_nested_rle$lengths[x] - 1L)
+      } else {
+        rep(paste(x, "grouped"), col_nested_rle$lengths[x])
+      }
+    }))
+    col_groups_list <- split(col_groups, col_group_bins)
+
+    data_rle <- rle(!grepl("^#", raw_lines))
+    data_indices <- cumsum(data_rle$lengths[data_rle$values])
+    data_groups <- lapply(1L:length(data_indices), function(x) {
+      if (x == 1L) {
+        idx <- 1L:data_indices[x]
+      } else {
+        idx <- max(data_indices[x-1L] + 1L):data_indices[x]
+      }
+      data_lines[idx]
+    })
+
+    cols_all <- unique(unlist(col_groups))
+
+    data_chunked <- lapply(1L:length(data_groups), function(x) {
+      group_data <- data_groups[[x]]
+      group_cols <- col_groups_list[[x]]
+      if (length(group_cols) == 1L) {
+        group_df <- do.call(rbind, strsplit(group_data, ","))
+        colnames(group_df) <- unlist(group_cols)
+        group_df <- as.data.frame(group_df)
+        group_df[,setdiff(cols_all, colnames(group_df))] <- NA
+        group_df
+      } else {
+        group_data_indices <- rep(1L:length(group_cols), length.out = length(group_data))
+        group_data_list <- lapply(1L:length(group_cols), function(x) {
+          group_df <- do.call(rbind, strsplit(group_data[group_data_indices == x], ","))
+          colnames(group_df) <- unlist(group_cols[[x]])
+          group_df <- as.data.frame(group_df)
+          group_df[,setdiff(cols_all, colnames(group_df))] <- NA
+          group_df
+        })
+        group_data_df <- do.call(rbind, group_data_list)
+        group_data_df[as.vector(t(matrix(1L:nrow(group_data_df), ncol = length(group_cols)))),]
+      }
+    })
+
+    do.call(rbind, data_chunked)
+
+  }
+
+
+  results_parsed <- lapply(data_chunks, read_ibex_)
+
+  cols_results <- unique(unlist(lapply(results_parsed, colnames)))
+
+  results <- lapply(results_parsed, function(x) {
+    x[,setdiff(cols_results, colnames(x))] <- NA
+    x
   })
 
-  if (length(results) == 1L) {
-    results[[1L]]
-  } else{
-    if (simplify) {
-      Reduce(function(left, right) {merge(left, right, by = 1:7)}, results)
-    } else {
-      results
-    }
-  }
+  results <- do.call(rbind, results)
+
+  rownames(results) <- NULL
+
+  return(results)
 
 }
