@@ -1,8 +1,8 @@
-#' Generate a CodeCogs URL that renders latex as image
+#' Generate a CodeCogs URL that renders LaTeX as image
 #'
 #' Interactive version at `https://www.codecogs.com/latex/eqneditor.php`
 #'
-#' @param formula An appropriately escaped string of LaTex formula. Using the new string literal syntax `r"(...)"` from R 4.0.0 on the existing formula is recommended.
+#' @param formula An appropriately escaped string of LaTeX code. Using the new string literal syntax `r"(...)"` from R 4.0.0 on the existing formula is recommended.
 #' @param size Font size. One of "tiny", "small", "normal", "large", or "huge"
 #' @param dpi Image resolution. Defaults to 300
 #' @param transparent Should the background be transparent? Defaults to `FALSE`, which adds a white background.
@@ -42,7 +42,7 @@ icon_html <- function(icon, type = "css") {
   matched <- icon_table[(grepl(icon, icon_table$name)),]
   if (nrow(matched) > 1) {
     matched[[type]][1]
-    message(paste("Returning first match. Other matches:", matched[[type]] - 1))
+    message(paste("Returning first match. Other matches:", matched[[type]][-1L]))
   } else if (nrow(matched) == 1L) {
     matched[[type]]
   } else {
