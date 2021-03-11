@@ -1,0 +1,4 @@
+Name: ragg autosave
+Description: Saves last plot using the AGG graphic device
+Binding: raggsave_auto
+Interactive: true

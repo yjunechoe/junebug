@@ -2,7 +2,7 @@
 % Please edit documentation in R/miscellaneous.R
 \name{latex_query}
 \alias{latex_query}
-\title{Generate a CodeCogs URL that renders latex as image}
+\title{Generate a CodeCogs URL that renders LaTeX as image}
 \usage{
 latex_query(
   formula,
@@ -13,7 +13,7 @@ latex_query(
 )
 }
 \arguments{
-\item{formula}{An appropriately escaped string of LaTex formula. Using the new string literal syntax \code{r"(...)"} from R 4.0.0 on the existing formula is recommended.}
+\item{formula}{An appropriately escaped string of LaTeX code. Using the new string literal syntax \code{r"(...)"} from R 4.0.0 on the existing formula is recommended.}
 
 \item{size}{Font size. One of "tiny", "small", "normal", "large", or "huge"}
 
