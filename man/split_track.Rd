@@ -4,7 +4,7 @@
 \alias{split_track}
 \title{Split and track trajectory of individual levels of a group}
 \usage{
-split_track(df, grouping_var, tracked_along, ..., tracked_groups = ".all")
+split_track(df, grouping_var, tracked_along, ..., tracked_groups = NULL)
 }
 \arguments{
 \item{df}{data frame}
@@ -15,7 +15,7 @@ split_track(df, grouping_var, tracked_along, ..., tracked_groups = ".all")
 
 \item{...}{specification for the tracking window passed to dplyr::filter()}
 
-\item{tracked_groups}{levels of the grouping_var to be tracked. Defaults to all}
+\item{tracked_groups}{levels of the grouping_var to be tracked. Defaults to value NULL, which tracks all groups.}
 }
 \value{
 a data frame

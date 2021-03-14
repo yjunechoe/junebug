@@ -6,7 +6,7 @@
 #' @param grouping_var column of the grouping variable used to split the data
 #' @param tracked_along column of the tracking dimension to be passed into
 #' @param ... specification for the tracking window passed to dplyr::filter()
-#' @param tracked_groups levels of the grouping_var to be tracked. Defaults to all
+#' @param tracked_groups levels of the grouping_var to be tracked. Defaults to value NULL, which tracks all groups.
 #'
 #' @return a data frame
 #' @export
@@ -34,19 +34,22 @@
 #'
 #' animate(anim, width = 5, height = 3, units = "in", res = 150)
 #' }
-split_track <- function(df, grouping_var, tracked_along, ..., tracked_groups = ".all") {
+split_track <- function(df, grouping_var, tracked_along, ..., tracked_groups = NULL) {
+
+  grouping_var_sym <- rlang::ensym(grouping_var)
+  tracked_along_sym <- rlang::ensym(tracked_along)
 
   region <- df %>%
     dplyr::filter(...) %>%
     dplyr::group_by({{ grouping_var }}) %>%
-    dplyr::mutate("row_id" = 1:dplyr::n()) %>%
+    dplyr::mutate("row_id" = 1L:dplyr::n()) %>%
     dplyr::ungroup() %>%
     dplyr::select("row_id", {{ grouping_var }}, {{ tracked_along }})
   region_wide <- region %>%
     tidyr::pivot_wider(names_from = {{ grouping_var }}, values_from = {{ tracked_along }}) %>%
     dplyr::select(-"row_id")
 
-  if (length(tracked_groups) == 1 && tracked_groups == ".all") {
+  if (length(tracked_groups) == 1L && is.null(tracked_groups)) {
     tracked_groups <- names(region_wide)
     untracked <- NULL
   } else {
@@ -54,33 +57,27 @@ split_track <- function(df, grouping_var, tracked_along, ..., tracked_groups = "
       dplyr::select(-{{ tracked_groups }})
   }
 
-  grouping_var_enquo <- rlang::enquo(grouping_var)
-  tracked_along_enquo <- rlang::enquo(tracked_along)
-
   region_split <- dplyr::bind_rows(
     untracked,
-    purrr::map_dfr(tracked_groups, ~dplyr::select(region_wide, .x))
+    purrr::map_dfr(tracked_groups, ~ dplyr::select(region_wide, .x))
   ) %>%
     tidyr::fill(dplyr::everything(), .direction = "down") %>%
     dplyr::mutate(dplyr::across(
       dplyr::everything(),
-      ~ifelse(is.na(.x), min(dplyr::pull(region, {{ tracked_along }}), na.rm = TRUE) - 1, .x))
+      ~ dplyr::if_else(is.na(.x), min(dplyr::pull(region, {{ tracked_along }}), na.rm = TRUE) - 1, as.double(.x)))
     ) %>%
     tidyr::pivot_longer(
       dplyr::everything(),
-      names_to = rlang::quo_text(grouping_var_enquo),
-      values_to = rlang::quo_text(tracked_along_enquo)
+      names_to = rlang::as_name(grouping_var_sym),
+      values_to = rlang::as_name(tracked_along_sym)
     )
 
   suppressMessages({
     df %>%
       dplyr::anti_join(dplyr::filter(df, ...)) %>%
-      dplyr::bind_rows(
-        region_split %>%
-          dplyr::inner_join(df)
-      ) %>%
+      dplyr::bind_rows(dplyr::inner_join(region_split, df)) %>%
       dplyr::group_by({{ grouping_var }}) %>%
-      dplyr::mutate(!!tracked_along_enquo := dplyr::row_number()) %>%
+      dplyr::mutate(!!tracked_along_sym := dplyr::row_number()) %>%
       dplyr::ungroup()
   })
 }
