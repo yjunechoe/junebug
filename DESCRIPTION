@@ -29,4 +29,7 @@ Imports:
     grDevices,
     stringr,
     ggtext,
-    ragg
+    ragg,
+    systemfonts,
+    uuid,
+    textshaping
