@@ -114,3 +114,14 @@ raggsave_auto <- function(folder = "raggsaveauto_img", p = ggplot2::last_plot(),
     warning('The plot_load argument must be one of c("app", "rstudio", "none")')
   }
 }
+
+#' Save and open plot
+#'
+#' Wrapper around `ggplot2::ggsave()` that opens rendered output using the system's default app for the graphic type.
+#'
+#' @param ... Passed into `ggplot2::ggsave()`
+#'
+#' @export
+ggsave2 <- function(...) {
+  system2("open", base::withVisible(ggplot2::ggsave(...))$value)
+}

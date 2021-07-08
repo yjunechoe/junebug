@@ -3,6 +3,7 @@
 export("%>%")
 export(col_dummy)
 export(font_hoist)
+export(ggsave2)
 export(ggsave_auto)
 export(icon_html)
 export(junebug_palette)
